@@ -1,0 +1,10 @@
+class Solution {
+public:
+  void rotate(vector<int>& nums, int k) {
+int temp,index;
+index = nums.size();
+temp = index - (k%index);
+if(nums.size() > 1)
+std::rotate(nums.begin(), nums.begin()+temp, nums.end());
+}
+};
