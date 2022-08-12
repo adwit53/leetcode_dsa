@@ -1,0 +1,22 @@
+class Solution {
+public:
+       int maxSubArray(vector<int>& v) {
+        
+        int n=v.size();
+        int ans=INT_MIN,temp=0;
+        for(int z=0;z<n;z++)
+        {
+            temp+=v[z];
+            cout<<temp<<endl;
+            ans=max(ans,temp);
+
+            if(temp<0)
+            {
+                temp=0;
+                
+            }
+        }
+        
+        return ans;
+    }
+};
