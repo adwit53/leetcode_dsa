@@ -1,0 +1,25 @@
+class Solution {
+public:
+   vector<int> twoSumhelper(vector<int> nums, int target) {
+        sort(nums.begin(),nums.end());
+        int i=0;
+        int j=nums.size()-1;
+        int sum=0;
+        while(i<j){
+            sum=nums[i]+nums[j];
+            if(sum<target) i++;
+            else if(sum>target) j--;
+            else return {nums[i],nums[j]};
+        }
+        return {};
+}
+vector<int> twoSum(vector<int>& nums,int target){
+    vector<int> nos=twoSumhelper(nums,target);
+    int i=-1,j=-1;
+    for(int u=0;u<nums.size();u++){
+        if(i==-1 && nums[u]==nos[0]) i=u;
+        else if(j==-1 && nums[u]==nos[1]) j=u;
+    }
+    return {i,j};
+}
+};
