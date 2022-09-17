@@ -2,7 +2,7 @@ class Solution {
 public:
     vector<vector<int>> threeSum(vector<int>& nums) {
         
-        vector<vector<int>> triplets;
+        vector<vector<int>> triplet;
         sort(nums.begin(),nums.end());
         for(int i=0;i<nums.size()-2;i++)//to initialize the 'i' pointer for first variable
         {
@@ -17,8 +17,7 @@ public:
                         temp.push_back(nums[i]);
                         temp.push_back(nums[low]);
                         temp.push_back(nums[high]);
-                        triplets.push_back(temp);
-                        //to skip the indexes with dublicate value
+                        triplet.push_back(temp);
                         while(low<high&&(nums[low]==nums[low+1]))low++;
                         while(low<high&&(nums[high]==nums[high-1]))high--;
                         low++;
@@ -35,6 +34,6 @@ public:
                 }
             }
         }
-        return triplets;
+        return triplet;
     }
 };
