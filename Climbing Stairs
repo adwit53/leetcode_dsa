@@ -1,0 +1,28 @@
+class Solution {
+ int s=0;
+ unordered_map<int,int> m;
+public:
+    int climbStairs(int n) {
+        if(m[n]>0)
+        {
+            s+=m[n];
+            return m[n];
+        }
+        if(n==2)
+        {
+            s+=2;
+            return 2;
+        }
+        else if(n==1)
+        {
+            s+=1;
+            return 1;
+        }
+        else
+        {
+        m[n-1]=climbStairs(n-1);
+        m[n-2]=climbStairs(n-2);
+        return s;
+        }
+    }
+};
