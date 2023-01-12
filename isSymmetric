@@ -1,0 +1,19 @@
+class Solution {
+public:
+    bool isSymmetric(TreeNode* root) {
+        return root==NULL || SymmTraverse(root->left,root->right);
+    }
+    bool SymmTraverse(TreeNode* left,TreeNode* right){
+        //base condition return true when both subtree points to null that means at particular nod eboth are identical.
+        if(left==NULL && right==NULL) return true;
+
+        //specifies that one of the subtree have node and another have not than return false because its not identical.
+        if(left!=NULL  && right!=NULL){
+            //checks whether node's values are equal, and traverse for mirrored subtrees respectively.
+            if(left->val == right->val && SymmTraverse(left->left,right->right) && SymmTraverse(left->right,right->left)) 
+            return true;
+        }
+        return false;
+
+    }
+};
