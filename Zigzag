@@ -1,0 +1,50 @@
+class Solution {
+public:
+    string convert(string s, int numRows) {
+        vector<string> m;
+        bool z=true;
+        string ans;
+        if(numRows<2)
+        {
+            return s;
+        }
+        int j=0;
+        for(int h=0;h<numRows;h++)
+        {
+            m.push_back("");
+        }
+        for(int i=0;i<s.length();i++)
+        {
+            if(j<=0)
+            {
+                j=0;
+                z=!z;
+            }
+            if(!z)
+            {
+                m[j]=m[j]+(s.at(i));
+                j++;
+
+            }
+            else
+            {
+               m[j]=m[j]+(s.at(i));
+                j--;
+            }
+            if(j>=numRows)
+            {
+                j=j-2;
+                z=!z;
+            }
+
+        }
+        for(int i=0;i<m.size();i++)
+        {
+          
+                ans=ans+m[i];
+        }
+return ans;
+
+        
+    }
+};
