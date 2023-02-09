@@ -1,0 +1,42 @@
+class Solution {
+public:
+    int lengthOfLIS(vector<int>& nums) {
+        vector<int> nodes(nums.size(),-1);
+        int max=0;int t;
+       for(int j=0;j<nums.size();j++)
+       {
+           t=recurs(nums,j,nodes);
+           if(max<t)
+           {
+               max=t;
+           }
+       }
+       return max;
+    }
+    public:
+    int recurs(vector<int>& nums,int node,vector<int> &nodes)
+    {
+        int m=0;int t=0;
+        if(node==nums.size()-1)
+        {
+            return 1;
+        }
+        if(nodes[node]!=-1)
+        {
+            return nodes[node];
+        }
+        for(int i=node+1;i<nums.size();i++)
+        {
+            if(nums[node]<nums[i])
+            {
+               t=recurs(nums,i,nodes);
+               if(m<t)
+               {
+                   m=t;
+               }
+            }
+        }
+        return nodes[node]=1+m;
+    }
+
+};
