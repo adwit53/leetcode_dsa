@@ -1,0 +1,30 @@
+class Solution {
+public:
+    int minPathSum(vector<vector<int>>& grid) {
+        vector<vector<int>> arr( grid.size() , vector<int> (grid[0].size(),-1)); 
+        return recurs(grid,0,0,arr);
+    }
+    int recurs(vector<vector<int>>& grid,int i,int j,vector<vector<int>>& arr)
+    {
+        if(arr[i][j]!=-1)
+        {
+            return arr[i][j];
+        }
+        if(i==grid.size()-1 && j==grid[i].size()-1)
+        {
+            return arr[i][j]=grid[i][j];
+        }
+        else if(i<grid.size()-1 && j<grid[i].size()-1)
+        {
+            return arr[i][j]=min(grid[i][j]+recurs(grid,i+1,j,arr),grid[i][j]+recurs(grid,i,j+1,arr));
+        }
+        else if(i==grid.size()-1 && j<grid[i].size()-1)
+        {
+            return arr[i][j]=grid[i][j]+recurs(grid,i,j+1,arr);
+        }
+        else
+        {
+          return arr[i][j]=grid[i][j]+recurs(grid,i+1,j,arr);
+        }
+    }
+};
