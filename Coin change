@@ -1,0 +1,37 @@
+class Solution {
+public:
+    int coinChange(vector<int>& coins, int amount) {
+         vector<vector<int>> arr( coins.size()+1, vector<int> (amount+1,-1)); 
+        int t=recurs(coins,amount,0,amount,arr);
+        if(t>amount)
+        {
+            return -1;
+        }
+        else{
+            return t;
+        }
+    }
+    int recurs(vector<int>& coins,int amount, int i, int og,vector<vector<int>>& arr)
+    {
+        if(arr[i][amount]!=-1)
+        {
+            return arr[i][amount];
+        }
+        if(amount==0)
+        {
+            return arr[i][amount]=0;
+        }
+        if(i==coins.size())
+        {
+            return 2*og;
+        }
+        if(coins[i]<=amount)
+        {
+        return arr[i][amount]=(min(1+recurs(coins,amount-coins[i],i,og,arr),recurs(coins,amount,i+1,og,arr)));
+        }
+        else
+        {
+            return arr[i][amount]=(recurs(coins,amount,i+1,og,arr));
+        }
+    }
+};
