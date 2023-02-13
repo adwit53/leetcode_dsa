@@ -1,0 +1,20 @@
+class Solution {
+public:
+    int minimumTotal(vector<vector<int>>& triangle) {
+        int n=triangle.size();
+         vector<vector<int>> dp( n, vector<int>(n,-1)); 
+        return (recurs(triangle,0,0,dp));
+    }
+    int recurs(vector<vector<int>>& triangle,int i,int j,vector<vector<int>>& dp)    
+    {
+        if(i==triangle.size())
+        {
+            return 0;
+        }
+        if(dp[i][j]!=-1)
+        {
+            return dp[i][j];
+        }
+        return dp[i][j]=(min(triangle[i][j]+recurs(triangle,i+1,j,dp),(triangle[i][j]+recurs(triangle,i+1,j+1,dp))));
+    }
+};
