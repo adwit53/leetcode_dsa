@@ -1,0 +1,20 @@
+class Solution {
+public:
+    int dp1[101],dp2[101];
+    int helper2(vector<int>& nums,int i){
+        if(i<0) return 0;
+        if(dp2[i] != -1) return dp2[i];
+        return dp2[i]=max(nums[i]+helper2(nums,i-2),helper2(nums,i-1)); 
+    }
+    int helper1(vector<int>& nums,int i){
+        if(i<1) return 0;
+        if(dp1[i] != -1) return dp1[i];
+        return dp1[i]=max(nums[i]+helper1(nums,i-2),helper1(nums,i-1)); 
+    }
+    int rob(vector<int>& nums) {
+        memset(dp1,-1,sizeof(dp1));
+        memset(dp2,-1,sizeof(dp2));
+        if(nums.size() ==  1 ) return nums[0];
+        return max(helper1(nums,nums.size()-1),helper2(nums,nums.size()-2));
+    }
+};
