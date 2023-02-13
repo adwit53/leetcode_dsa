@@ -1,0 +1,19 @@
+class Solution {
+public:
+int fun(int i,int n,int target,vector<int>& nums,int sum,vector<vector<int>> &dp){
+    if(i==n){
+      if (target==sum)
+      return 1;
+      else return 0;
+      }
+      if(dp[i][sum+1000]!=-1) return dp[i][sum+1000];
+    int left=fun(i+1,n,target,nums,sum+nums[i],dp);
+    int right=fun(i+1,n,target,nums,sum-nums[i],dp);
+    return dp[i][sum+1000]=right+left;
+}
+    int findTargetSumWays(vector<int>& nums, int target) {
+        int sum=0;
+        vector<vector<int>> dp(nums.size()+1,vector<int>(2005,-1));
+        return fun(0,nums.size(),target,nums,sum,dp);
+    }
+};
