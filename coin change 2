@@ -1,0 +1,30 @@
+class Solution {
+public:
+    int change(int amount, vector<int>& coins) {
+        vector<vector<int>> dp(coins.size()+1,vector<int>(amount+1,-1));
+       return recurs(amount,coins,0,dp);
+    }
+    int recurs(int amount, vector<int>& coins, int i,vector<vector<int>> &dp)
+    {
+        if(amount==0)
+        {
+            return dp[i][amount]=1;
+        }
+        if(i==coins.size())
+        {
+            return dp[i][amount]=0;
+        }
+        if(dp[i][amount]!=-1)
+        {
+            return dp[i][amount];
+        }
+        if(coins[i]<=amount)
+        {
+            return dp[i][amount]=(recurs(amount-coins[i],coins,i,dp)+recurs(amount,coins,i+1,dp));
+        }
+        else
+        {
+            return dp[i][amount]=(recurs(amount,coins,i+1,dp));
+        }
+    }
+};
