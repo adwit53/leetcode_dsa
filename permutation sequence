@@ -1,0 +1,29 @@
+class Solution {
+    public: string s="";
+    public: void func(int n, int r,vector<int> vec)
+    {
+        if(n==0)
+        {
+            return;
+        }
+        int p=1;
+        for(int i=1;i<=n;i++)
+        {
+            p=p*i;
+        }
+        int pbyn=p/n;
+        s=s+to_string(vec[(r/pbyn)]);
+        vec.erase(vec.begin()+(r/pbyn));
+        func(n-1,r%pbyn,vec);
+    }
+public:
+    string getPermutation(int n, int r) {
+        vector<int> vec;
+        for(int i=1;i<=n;i++)
+        {
+            vec.push_back(i);
+        }
+        func(n,r-1,vec);
+        return s;
+    }
+};
