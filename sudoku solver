@@ -1,0 +1,78 @@
+class Solution {
+public:
+    void solveSudoku(vector<vector<char>>& board) {
+        recurs(0,0,board);
+    }
+public:
+    bool recurs(int i, int j,vector<vector<char>>& board)
+    {
+        if(j==9)
+        {
+            return true;
+        }
+        if(i>=9)
+        {
+            return(recurs(0,j+1,board));
+        }
+           char stor=board[i][j];
+        unordered_map<char,int> m;
+        if(board[i][j]!='.')
+        {
+            return(recurs(i+1,j,board));          //if a number
+        }
+        for(int k=0;k<9;k++)
+        {
+            if(board[i][k]!='.')
+            {
+                m[board[i][k]]=-1;          //which numbers occupied
+            }
+            if(board[k][j]!='.')
+            {
+            m[board[k][j]]=-1;
+            }
+        }
+        int a1=i/3;
+        int a2=a1+1;
+        a1=a1*3;
+        a2=a2*3;
+        int b1=j/3;
+        int b2=b1+1;
+        b1=b1*3;
+        b2=b2*3;
+        for(int a=a1;a<a2;a++)
+        {
+            for(int b=b1 ;b<b2;b++)
+            {
+            if(board[a][b]!='.')
+            {
+                m[board[a][b]]=-1;          //which numbers occupied
+            }
+            }
+        }
+        bool flag=false;
+        for(int k=1;k<=9;k++)
+        {
+            if(m[char(k+48)]!=-1)
+            {
+                flag=true;
+                board[i][j]=char(k+48);
+                cout<<board[i][j]<<i<<j<<endl;
+                if(recurs(i+1,j,board))
+                {
+                    return true;
+                }
+                else
+                {
+                    flag=false;
+                }
+            }
+        }
+        if(flag==false)
+        {
+            board[i][j]=stor;
+            return flag;
+        }
+        return true;
+        
+    }
+};
